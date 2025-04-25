@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Исламский портал</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Arial", sans-serif;
+      }
+
+      body {
+        background: url("https://cdnjs.cloudflare.com/ajax/libs/placeholder-img/1.0.0/placeholder.png");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: white;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      body::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: -1;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      header {
+        text-align: center;
+        padding: 20px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        margin-bottom: 30px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        animation: glow 2s infinite alternate;
+      }
+
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        to {
+          text-shadow: 0 0 20px rgba(0, 255, 255, 0.8),
+            0 0 30px rgba(0, 255, 255, 0.6);
+        }
+      }
+
+      nav {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+
+      .nav-button {
+        padding: 12px 24px;
+        background: linear-gradient(45deg, #1e3c72, #2a5298);
+        color: white;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .nav-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 7px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .nav-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, #00c6ff, #0072ff);
+        transition: all 0.4s ease;
+        z-index: -1;
+      }
+
+      .nav-button:hover::before {
+        left: 0;
+      }
+
+      .prayer-times {
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .prayer-times h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #4fc3f7;
+      }
+
+      .prayer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+      }
+
+      .prayer-item {
+        background: rgba(30, 60, 114, 0.7);
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        transition: transform 0.3s ease;
+      }
+
+      .prayer-item:hover {
+        transform: scale(1.05);
+        background: rgba(30, 60, 114, 0.9);
+      }
+
+      .prayer-name {
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #ffeb3b;
+      }
+
+      .prayer-time {
+        font-size: 1.2rem;
+      }
+
+      .main-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 30px;
+      }
+
+      .content-box {
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .content-box:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      }
+
+      .content-box h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #4fc3f7;
+      }
+
+      .content-box p {
+        margin-bottom: 20px;
+        line-height: 1.6;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background: linear-gradient(45deg, #1e3c72, #2a5298);
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        margin-top: 15px;
+        transition: all 0.3s ease;
+      }
+
+      .btn:hover {
+        background: linear-gradient(45deg, #00c6ff, #0072ff);
+        transform: translateY(-3px);
+        box-shadow: 0 7px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .prophet-story {
+        grid-column: 1 / -1;
+        text-align: center;
+      }
+
+      .prophet-story h2 {
+        margin-bottom: 30px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px 0;
+        margin-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      #digital-clock {
+        font-size: 2rem;
+        text-align: center;
+        margin: 20px 0;
+        font-weight: bold;
+        color: #4fc3f7;
+        text-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
+      }
+
+      #date-display {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 1.2rem;
+      }
+
+      .quran-section {
+        margin-top: 40px;
+        text-align: center;
+      }
+
+      .quran-verse {
+        font-size: 1.2rem;
+        font-style: italic;
+        margin: 20px 0;
+        position: relative;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .quran-verse:before,
+      .quran-verse:after {
+        content: '"';
+        font-size: 2rem;
+        color: #4fc3f7;
+      }
+
+      .calendar-section {
+        margin-top: 40px;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .calendar-section h2 {
+        color: #4fc3f7;
+        margin-bottom: 20px;
+      }
+
+      /* Адаптивность для телефонов */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2rem;
+        }
+
+        .prayer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .main-content {
+          grid-template-columns: 1fr;
+        }
+
+        .nav-button {
+          padding: 10px 20px;
+          font-size: 0.9rem;
+        }
+
+        #digital-clock {
+          font-size: 1.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 1.8rem;
+        }
+
+        .prayer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        nav {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .nav-button {
+          width: 80%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Исламский портал</h1>
+        <div id="date-display"></div>
+        <div id="digital-clock"></div>
+      </header>
+
+      <nav>
+        <button
+          class="nav-button"
+          onclick="window.location.href='https://quran-online.ru/'"
+        >
+          Коран
+        </button>
+        <button
+          class="nav-button"
+          onclick="window.location.href='https://umma.ru/khadisy'"
+        >
+          Хадисы
+        </button>
+        <button
+          class="nav-button"
+          onclick="window.location.href='https://ummah.su/quran/'"
+        >
+          Суры
+        </button>
+        <button
+          class="nav-button"
+          onclick="window.location.href='https://explore-islam.com/%D1%81%D0%B0%D0%BC%D1%8B%D0%B5-%D0%B2%D0%BB%D0%B8%D1%8F%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%B0%D1%8F%D1%82%D1%8B-%D0%B8-%D0%B0%D1%8F%D1%82%D1%8B-%D0%BA%D0%BE%D1%80%D0%B0%D0%BD%D0%B0-%D0%BD/'"
+        >
+          Аяты
+        </button>
+        <button class="nav-button" onclick="scrollToSection('prophet')">
+          История Пророка
+        </button>
+        <button class="nav-button" onclick="scrollToSection('calendar')">
+          Исламский календарь
+        </button>
+      </nav>
+
+      <section class="prayer-times">
+        <h2>Время намаза</h2>
+        <div class="prayer-grid">
+          <div class="prayer-item">
+            <div class="prayer-name">Фаджр</div>
+            <div class="prayer-time" id="fajr-time">05:21</div>
+          </div>
+          <div class="prayer-item">
+            <div class="prayer-name">Зухр</div>
+            <div class="prayer-time" id="dhuhr-time">12:30</div>
+          </div>
+          <div class="prayer-item">
+            <div class="prayer-name">Аср</div>
+            <div class="prayer-time" id="asr-time">16:15</div>
+          </div>
+          <div class="prayer-item">
+            <div class="prayer-name">Магриб</div>
+            <div class="prayer-time" id="maghrib-time">19:45</div>
+          </div>
+          <div class="prayer-item">
+            <div class="prayer-name">Иша</div>
+            <div class="prayer-time" id="isha-time">21:15</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="quran-section">
+        <h2>Аят дня</h2>
+        <div class="quran-verse" id="ayah-of-day">
+          "Воистину, Аллах не меняет положения людей, пока они не изменят самих
+          себя." (Сура Ар-Рад, аят 11)
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="content-box">
+          <h2>Священный Коран</h2>
+          <p>
+            Коран - священная книга мусульман, которая содержит слово Аллаха,
+            переданное через Пророка Мухаммада (мир ему). Коран является
+            основным источником исламского учения и руководством для всех
+            мусульман.
+          </p>
+          <p>
+            В Коране содержится 114 сур (глав) и более 6000 аятов (стихов),
+            которые охватывают все аспекты жизни верующего человека.
+          </p>
+          <a href="https://quran-online.ru/" class="btn">Читать Коран</a>
+        </div>
+
+        <div class="content-box">
+          <h2>Хадисы</h2>
+          <p>
+            Хадисы - это сборники изречений и деяний Пророка Мухаммада (мир
+            ему), которые являются вторым источником исламского права после
+            Корана. Они объясняют и дополняют учение Корана.
+          </p>
+          <p>
+            Наиболее авторитетными сборниками хадисов считаются Сахих аль-Бухари
+            и Сахих Муслим. Изучение хадисов позволяет глубже понять ислам и
+            следовать примеру Пророка.
+          </p>
+          <a href="https://umma.ru/khadisy" class="btn"
+            >Ознакомиться с хадисами</a
+          >
+        </div>
+
+        <div class="content-box">
+          <h2>Суры и Аяты</h2>
+          <p>
+            Суры - это главы Корана, а аяты - его стихи. Каждая сура имеет свое
+            название и значение. Первая сура, Аль-Фатиха (Открывающая), читается
+            во время каждого намаза.
+          </p>
+          <p>
+            Аяты Корана несут в себе наставления, истории пророков, моральные
+            уроки и духовные указания для верующих. Чтение и размышление над
+            аятами приближает человека к Аллаху.
+          </p>
+          <a href="https://ummah.su/quran/" class="btn">Перейти к сурам</a>
+          <a
+            href="https://explore-islam.com/%D1%81%D0%B0%D0%BC%D1%8B%D0%B5-%D0%B2%D0%BB%D0%B8%D1%8F%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D0%B0%D1%8F%D1%82%D1%8B-%D0%B8-%D0%B0%D1%8F%D1%82%D1%8B-%D0%BA%D0%BE%D1%80%D0%B0%D0%BD%D0%B0-%D0%BD/"
+            class="btn"
+            >Перейти к аятам</a
+          >
+        </div>
+
+        <div class="content-box prophet-story" id="prophet">
+          <h2>История Пророка Мухаммада (мир ему)</h2>
+          <p>
+            Пророк Мухаммад (мир ему) родился в Мекке около 570 года нашей эры.
+            В возрасте 40 лет он получил первое откровение от Аллаха через
+            ангела Джибриля в пещере Хира. В течение последующих 23 лет он
+            проповедовал единобожие (таухид) и распространял учение ислама.
+          </p>
+          <p>
+            После переселения (Хиджры) в Медину в 622 году, Пророк Мухаммад (мир
+            ему) основал первое исламское государство. Он является примером для
+            всех мусульман и проводником на пути к Аллаху. Его учение и поступки
+            являются образцом для подражания во всех аспектах жизни.
+          </p>
+          <p>
+            Жизнь Пророка Мухаммада (мир ему) была наполнена трудностями и
+            испытаниями, которые он преодолевал с верой и терпением. Его высокие
+            моральные качества и мудрость привлекали людей к исламу. Его вклад в
+            распространение ислама и утверждение единобожия неоценим.
+          </p>
+          <a
+            href="https://medinaschool.org/library/creed/prorok-muhammad/prorok-muhammed"
+            class="btn"
+            >Узнать больше о жизни Пророка</a
+          >
+        </div>
+      </div>
+
+      <section class="calendar-section" id="calendar">
+        <h2>Исламский календарь</h2>
+        <p>
+          Исламский календарь (Хиджра) - лунный календарь, используемый
+          мусульманами для определения религиозных праздников и событий. Год по
+          Хиджре начинается с переселения Пророка Мухаммада (мир ему) из Мекки в
+          Медину.
+        </p>
+        <p>Важные даты исламского календаря:</p>
+        <div class="prayer-grid">
+          <div class="prayer-item">
+            <div class="prayer-name">Рамадан</div>
+            <div class="prayer-time">9-й месяц</div>
+          </div>
+          <div class="prayer-item">
+            <div class="prayer-name">Ид аль-Фитр</div>
+            <div class="prayer-time">1 Шавваль</div>
+          </div>
+          <div class="prayer-item">
+            <div class="prayer-name">Ид аль-Адха</div>
+            <div class="prayer-time">10 Зуль-Хиджа</div>
+          </div>
+          <div class="prayer-item">
+            <div class="prayer-name">Лейлят аль-Кадр</div>
+            <div class="prayer-time">27 Рамадан</div>
+          </div>
+        </div>
+        <p id="hijri-date" style="margin-top: 20px; font-size: 1.2rem"></p>
+      </section>
+
+      <footer>
+        <p>&copy; 2025 Исламский портал. Все права защищены.</p>
+        <p>Да благословит вас Аллах!</p>
+      </footer>
+    </div>
+
+    <script>
+      // Функция для обновления времени
+      function updateClock() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, "0");
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const seconds = String(now.getSeconds()).padStart(2, "0");
+
+        document.getElementById(
+          "digital-clock"
+        ).textContent = `${hours}:${minutes}:${seconds}`;
+
+        // Обновляем дату
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        document.getElementById("date-display").textContent =
+          now.toLocaleDateString("ru-RU", options);
+
+        // Обновляем исламскую дату (приблизительно)
+        // В реальном проекте следует использовать специальную библиотеку для точного расчета
+        const islamicDate = "15 Шавваль 1446 г. по Хиджре";
+        document.getElementById(
+          "hijri-date"
+        ).textContent = `Сегодня по исламскому календарю: ${islamicDate}`;
+
+        setTimeout(updateClock, 1000);
+      }
+
+      // Функция для прокрутки к разделу
+      function scrollToSection(id) {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+
+      // Функция для получения времени намаза (заглушка - в реальном проекте здесь будет API)
+      function fetchPrayerTimes() {
+        // В реальном проекте здесь будет запрос к API для получения времени намаза
+        // Например, API Aladhan: https://aladhan.com/prayer-times-api
+
+        // Сейчас просто имитируем получение данных с некоторой задержкой
+        setTimeout(() => {
+          // Эти данные в реальном проекте будут приходить с сервера
+          const prayerData = {
+            fajr: "05:21",
+            dhuhr: "12:30",
+            asr: "16:15",
+            maghrib: "19:45",
+            isha: "21:15",
+          };
+
+          // Обновляем интерфейс
+          document.getElementById("fajr-time").textContent = prayerData.fajr;
+          document.getElementById("dhuhr-time").textContent = prayerData.dhuhr;
+          document.getElementById("asr-time").textContent = prayerData.asr;
+          document.getElementById("maghrib-time").textContent =
+            prayerData.maghrib;
+          document.getElementById("isha-time").textContent = prayerData.isha;
+        }, 1000);
+      }
+
+      // Функция для получения случайного аята
+      function getRandomAyah() {
+        // В реальном проекте здесь будет запрос к API для получения случайного аята
+        // Например, API Quran: https://alquran.cloud/api
+
+        // Список аятов для примера
+        const ayahs = [
+          '"Воистину, Аллах не меняет положения людей, пока они не изменят самих себя." (Сура Ар-Рад, аят 11)',
+          '"И Мы уже создали человека и знаем, что нашептывает ему душа, и Мы ближе к нему, чем шейная артерия." (Сура Каф, аят 16)',
+          '"Поистине, с трудностью приходит облегчение. Поистине, с трудностью приходит облегчение." (Сура Аш-Шарх, аяты 5-6)',
+          '"Кто сделал добро весом в пылинку, увидит его, и кто сделал зло весом в пылинку, увидит его." (Сура Аз-Залзала, аяты 7-8)',
+          '"О те, которые уверовали! Обращайтесь за помощью к терпению и молитве. Воистину, Аллах - с терпеливыми." (Сура Аль-Бакара, аят 153)',
+        ];
+
+        // Выбираем случайный аят
+        const randomIndex = Math.floor(Math.random() * ayahs.length);
+        document.getElementById("ayah-of-day").textContent = ayahs[randomIndex];
+      }
+
+      // Инициализация
+      document.addEventListener("DOMContentLoaded", () => {
+        updateClock();
+        fetchPrayerTimes();
+        getRandomAyah();
+      });
+    </script>
+  </body>
+</html>
